@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+   <title>Book Catalog</title>
+</h:head>
+<h:body>
+   <h3>Book Catalog</h3>
+   <h2>Books list</h2>
+   <table>
+      <tr>
+         <td><b>Last name </b></td>
+         <td><b>First name </b></td>
+         <td><b>ISBN</b></td>
+         <td><b>Year </b></td>
+         <td><b>Price</b></td>
+      </tr>
+      <ui:repeat var="book" value="#{bookCatalog.books}" varStatus="bookStatus" id="booksList">
+              <tr>
+                 <td>#{book.lastName}</td>
+                 <td>#{book.firstName}</td>
+                 <td>#{book.numberISBN}</td>
+                 <td>#{book.year}</td>
+                 <td>#{book.price}</td>
+                 <td><h:form><h:commandButton value="Remove" action="#{bookCatalog.remove(book)}">
+                    <f:ajax execute="@this" render="@all" />
+                 </h:commandButton>
+                 </h:form></td>
+                 <td><h:form><h:commandButton value="Update" action="#{bookCatalog.updateViewOpen(book)}">
+                    <f:ajax execute="@this" render="@all" />
+                 </h:commandButton>
+                 </h:form></td>
+              </tr>
+      </ui:repeat>
+
+   </table>
+   <h2>Update book</h2>
+   <table>
+      <h:form rendered="#{bookCatalog.updateView}">
+         <tr>
+            <td><b>Last name </b></td>
+            <td><b>First name </b></td>
+            <td><b>ISBN</b></td>
+            <td><b>Year </b></td>
+            <td><b>Price</b></td>
+         </tr>
+         <tr>
+            <td><h:form>
+               <h:inputText value="#{bookCatalog.updateLastName}"><f:ajax event="blur"/></h:inputText>
+            </h:form>
+            </td>
+            <td><h:form>
+               <h:inputText value="#{bookCatalog.updateFirstName}"><f:ajax event="blur"/></h:inputText>
+            </h:form>
+            </td>
+            <td><h:form>
+               <h:inputText value="#{bookCatalog.updateISBN}">
+                  <f:validateRegex pattern="\d{13}" />
+                  <f:ajax event="blur"/></h:inputText>
+            </h:form>
+            </td>
+            <td><h:form>
+               <h:inputText value="#{bookCatalog.updateYear}">
+                  <f:ajax event="blur"/></h:inputText>
+            </h:form>
+            </td>
+            <td><h:form>
+               <h:inputText value="#{bookCatalog.updatePrice}">
+                  <f:ajax event="blur"/></h:inputText>
+            </h:form>
+            </td>
+            <td><h:form><h:commandButton value="Update book" action="#{bookCatalog.update}">
+               <f:ajax execute="@this" render="@all" />
+            </h:commandButton>
+            </h:form>
+            </td>
+         </tr>
+      </h:form>
+   </table>
+   <h2>Add book</h2>
+   <table>
+      <h:form>
+         <tr>
+            <td><b>Last name </b></td>
+            <td><b>First name </b></td>
+            <td><b>ISBN</b></td>
+            <td><b>Year </b></td>
+            <td><b>Price</b></td>
+         </tr>
+         <tr>
+            <td><h:form>
+               <h:inputText value="#{bookCatalog.addLastName}"><f:ajax event="blur"/></h:inputText>
+            </h:form>
+            </td>
+            <td><h:form>
+               <h:inputText value="#{bookCatalog.addFirstName}"><f:ajax event="blur"/></h:inputText>
+            </h:form>
+            </td>
+            <td><h:form>
+               <h:inputText value="#{bookCatalog.addISBN}">
+                  <f:validateRegex pattern="\d{13}" />
+                  <f:ajax event="blur"/></h:inputText>
+            </h:form>
+            </td>
+            <td><h:form>
+               <h:inputText value="#{bookCatalog.addYear}">
+                  <f:ajax event="blur"/></h:inputText>
+            </h:form>
+            </td>
+            <td><h:form>
+               <h:inputText value="#{bookCatalog.addPrice}">
+                  <f:ajax event="blur"/></h:inputText>
+            </h:form>
+            </td>
+            <td><h:form><h:commandButton value="Add book" action="#{bookCatalog.add()}">
+               <f:ajax execute="@this" render="@all" />
+            </h:commandButton>
+            </h:form>
+            </td>
+         </tr>
+      </h:form>
+   </table>
+
+</h:body>
+</html>
